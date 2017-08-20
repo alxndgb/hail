@@ -270,8 +270,8 @@ object VEP {
       assembly = "GRCh37"
     }
 
-    val cmd =
-      Array(
+    val cmd_str = properties.getProperty("hail.vep.command")
+    val cmd = if (cmd_str == null) Array(
         perl,
         s"$location",
         "--format", "vcf",
@@ -285,7 +285,7 @@ object VEP {
         "--minimal",
         "--assembly", s"$assembly",
         "--plugin", s"$plugin",
-        "-o", "STDOUT")
+        "-o", "STDOUT") else cmd_str.split(" ")
 
     val inputQuery = vepSignature.query("input")
 
