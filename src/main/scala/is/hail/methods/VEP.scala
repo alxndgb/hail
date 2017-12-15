@@ -118,6 +118,7 @@ object VEP {
         "db" -> TString,
         "name" -> TString)),
       "exon" -> TString,
+      "flags" -> TArray(TString),
       "gene_id" -> TString,
       "gene_pheno" -> TInt,
       "gene_symbol" -> TString,
@@ -143,8 +144,9 @@ object VEP {
       "strand" -> TInt,
       "swissprot" -> TString,
       "transcript_id" -> TString,
-      "trembl" -> TString,
-      "uniparc" -> TString,
+      "trembl" -> TArray(TString),
+      "tsl" -> TInt,
+      "uniparc" -> TArray(TString),
       "variant_allele" -> TString)),
     "variant_class" -> TString)
 
