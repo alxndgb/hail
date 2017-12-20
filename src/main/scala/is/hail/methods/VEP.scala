@@ -354,9 +354,14 @@ object VEP {
                       (v, IndexedSeq.empty[Annotation])
                   }
                 } else {
-                  val a = JSONAnnotationImpex.importAnnotation(JsonMethods.parse(s), vepSignature)
-                  val vvep = variantFromInput(inputQuery(a).asInstanceOf[String])
 
+                  try{
+                    val a = JSONAnnotationImpex.importAnnotation(JsonMethods.parse(s), vepSignature)
+                  } catch {
+                    case e: Exception => println(s"can't convert vep output to JSON: $s");
+                  }
+
+                  val vvep = variantFromInput(inputQuery(a).asInstanceOf[String])
                   if (!nonStarToOriginalVariant.contains(vvep))
                     fatal(s"VEP output variant ${ vvep } not found in original variants.\nVEP output: $s")
 
